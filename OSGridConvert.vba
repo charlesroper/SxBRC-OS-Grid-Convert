@@ -208,17 +208,42 @@ End Sub
 
 Private Function CentreGridRef(strGridIn As String, strGridType As String) As String
     Dim strE As String, _
-    strN As String
+    strN As String, _
+    grLen As Integer, _
+    offset As Integer
     
+    grLen = Len(strGridIn)
+    
+    ' Calculate offset value
+    Select Case grLen
+    Case 12
+        offset = 0
+    Case 10
+        offset = 5
+    Case 8
+        offset = 50
+    Case 6
+        offset = 500
+    Case 5
+        offset = 1000
+    Case 4
+        offset = 5000
+    Case 2
+        offset = 50000
+    Case Else
+        offset = 0
+    End Select
+    
+        
     ' Split the numbers from the gridref into eastings and northings
-    strE = Mid$(strGridIn, 3, (Len(strGridIn) - 2) / 2)
-    strN = Right$(strGridIn, (Len(strGridIn) - 2) / 2)
+    strE = Mid$(strGridIn, 3, (grLen - 2) / 2)
+    strN = Right$(strGridIn, (grLen - 2) / 2)
     
     Select Case strGridType
     Case "standard"
     ' Pad eastings and northings with fives upto a total of 5 digits
-        strE = Left$(strE & "55555", 5)
-        strN = Left$(strN & "55555", 5)
+        strE = Left$(strE & offset, 5)
+        strN = Left$(strN & offset, 5)
     Case "tetrad"
         strE = Left$(strE, 1) & Val(Right$(strE, 1)) + 1
         strE = Left$(strE & "00000", 5)
