@@ -32,7 +32,7 @@ If cell A1 contains the reference TQ1234:
     =EASTING_C(A1)  512500
     =NORTHING_C(A1) 134500
 
-The conversion alogrithm can also handle the [DINTY](http://en.wikipedia.org/wiki/DINTY) tetrad reference style:
+The conversion alogrithm can also handle the [DINTY](http://en.wikipedia.org/wiki/DINTY) tetrad reference style. So if cell A1 contains the DINTY reference TQ21R:
 
     Formula         Result
     =EASTING(A1)    526000
